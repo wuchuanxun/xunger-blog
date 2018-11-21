@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="collection">
     <el-row :gutter="24" style="margin-left:6%;margin-right:6%">
       <router-link v-for="(art,index) in arts" :key="index" :to="art">
         <el-col :span="6">
@@ -26,12 +26,11 @@ export default {
   data(){
     return{
       arts:[
-        "Tensorflow","Github","Apple","Linux","Web","Note","成语","文学","历史","博客","纪录片","广告",
-        "Tensorflow","Github","Apple","Linux","Web","Note","成语","文学","历史","博客","纪录片","广告"
+        "Tensorflow","Github","Apple","Linux","Web","Note","成语"
       ]
     }
   },
-  name: 'home'
+  name: 'collection'
 }
 </script>
 

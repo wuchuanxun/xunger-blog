@@ -17,6 +17,7 @@ export default {
 
 <style scoped>
 #note{
+  margin-top: 6px;
   color: white;
   width: 100%;
 }

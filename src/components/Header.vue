@@ -8,13 +8,13 @@
     mode="horizontal" 
     :router="userouter"
     @select="changeTitle">
-    <el-menu-item index="1" route="Home">
-      <i class="el-icon-view"></i>
-      <span>Home</span> 
-    </el-menu-item>
-    <el-menu-item index="2" route="Collection">
+    <el-menu-item index="1" route="Collection">
       <i class="el-icon-menu"></i>
       <span>Collection</span> 
+    </el-menu-item>
+    <el-menu-item index="2" route="View">
+      <i class="el-icon-view"></i>
+      <span>View</span> 
     </el-menu-item>
     <el-menu-item index="3" route="About">
       <i class="el-icon-info"/>
@@ -32,13 +32,13 @@ export default {
   data(){
     return {
       userouter:true,
-      title:"Article"
+      title:"Collection"
     };
   },
   methods:{
     changeTitle(index,){
       switch (index) {
-        case "2":
+        case "1":
           this.title="Collection"
           break;
         case "3":

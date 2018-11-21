@@ -9,8 +9,8 @@
         <x-header/>  
     </el-header>
     </transition>
-    <el-main style='marginTop:120px'><router-view/></el-main>
-    <el-footer height=10><x-footer/></el-footer>
+    <el-main :style="{marginTop:'120px',minHeight:bodyMinHeight}"><router-view/></el-main>
+    <el-footer height="40px"><x-footer/></el-footer>
   </el-container>
 </template>
 
@@ -27,11 +27,15 @@ export default {
   data(){
     return{
       show:true,
-      isfixed:true
+      isfixed:true,
+      bodyMinHeight:300,
     }
   },
   mounted(){
     window.addEventListener("scroll",this.debounceScroll);
+  },
+  created(){
+    this.bodyMinHeight=(screen.availHeight-270)+"px";
   },
   methods:{
     debounceScroll: _.debounce(function () {
