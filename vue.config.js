@@ -77,5 +77,5 @@ module.exports = {
   // https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
   pwa: {},
   // 第三方插件配置
-  pluginOptions: {}
+  pluginOptions: {},
 }

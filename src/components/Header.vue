@@ -8,15 +8,19 @@
     mode="horizontal" 
     :router="userouter"
     @select="changeTitle">
-    <el-menu-item index="1" route="Collection">
+    <el-menu-item index="1" route="Word">
+      <i class="el-icon-news"></i>
+      <span>Word</span> 
+    </el-menu-item>
+    <el-menu-item index="2" route="Phrase">
       <i class="el-icon-menu"></i>
-      <span>Collection</span> 
+      <span>Phrase</span> 
     </el-menu-item>
-    <el-menu-item index="2" route="View">
-      <i class="el-icon-view"></i>
-      <span>View</span> 
+    <el-menu-item index="3" route="Sentence">
+      <i class="el-icon-document"/>
+      <span>Sentence</span>
     </el-menu-item>
-    <el-menu-item index="3" route="About">
+    <el-menu-item index="4" route="About">
       <i class="el-icon-info"/>
       <span>About</span>
     </el-menu-item>
@@ -32,20 +36,23 @@ export default {
   data(){
     return {
       userouter:true,
-      title:"Collection"
+      title:"Word"
     };
   },
   methods:{
     changeTitle(index,){
       switch (index) {
         case "1":
-          this.title="Collection"
+          this.title="Word"
+          break;
+        case "2":
+          this.title="Phrase";
           break;
         case "3":
-          this.title="About";
+          this.title="Sentence";
           break;
         default:
-          this.title="Article"
+          this.title="About"
           break;
       }
     }

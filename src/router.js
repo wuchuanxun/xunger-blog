@@ -10,15 +10,20 @@ export default new Router({
   routes: [
     {
       path:'/',
-      redirect:'/Collection'
+      redirect:'/Word'
     },
     {
-      path: '/View',
+      path: '/Word',
       name: 'View',
       component: Collection
     },
     {
-      path: '/Collection',
+      path: '/Phrase',
+      name: 'Collection',
+      component: Collection
+    },
+    {
+      path: '/Sentence',
       name: 'Collection',
       component: Collection
     },

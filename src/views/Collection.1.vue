@@ -13,8 +13,8 @@
       name="stop"
       @click.native="stopRecorder"/>
     <div>
-      <p v-show="isRecording">录制中</p>
-      <p v-show="isRecording==false">时长：{{recordedTime}}s</p>
+      <p>{{isRecording}}</p>
+      <p>{{recordedTime}}</p>
     </div>
     <div class="block">
       <el-slider
@@ -23,7 +23,7 @@
         show-stops>
       </el-slider>
     </div>
-    <audio :src="audio_url" controls="controls">
+    <audio :src="audio" controls="controls">
       Your browser does not support the audio element.
     </audio>
   </div>
@@ -31,19 +31,16 @@
 
 
 <script>
-import _ from 'lodash';
 const MicRecorder = require('mic-recorder-to-mp3');
 import icon from "../components/Icon";
 
 export default {
   data(){
     return{
-      audio_type:undefined,
-      audio_url:undefined,
-      audio_buffer:undefined,
+      audio:undefined,
       isRecording:false,
       recordedTime:0,
-      TimeRange:[0,100],
+      TimeRange:[30,80],
       iconButtonType:'mic',
       recorder:new MicRecorder({
         bitRate: 128
@@ -62,40 +59,26 @@ export default {
       this.recorder
         .stop()
         .getMp3().then(([buffer, blob]) => {
-          this.audio_buffer = new Int8Array(blob.size);
-          var acIndex=0;
-          for (let index = 0; index < buffer.length; index++) {
-            this.audio_buffer.set(buffer[index],acIndex);
-            acIndex+=buffer[index].length;
-          }
-          this.audio_type=blob.type;
-          const file = new File([this.audio_buffer], 'me-at-thevoice.mp3', {
-            type: this.audio_type,
+          console.log('sd');
+          // do what ever you want with buffer and blob
+          // Example: Create a mp3 file and play
+          const file = new File(buffer.slice(20,200), 'me-at-thevoice.mp3', {
+            type: blob.type,
             lastModified: Date.now()
           });
-          this.audio_url=URL.createObjectURL(file);
-          this.recordedTime=this.audio_buffer.length/16000;
+          console.log(buffer.slice(1,10));
+          console.log(blob);
+          const player = new Audio(URL.createObjectURL(file));
+          player.play();
+          this.audio=player;
+          console.log(buffer.length)
+
+          console.log('sd2');
           this.isRecording=false;     
         }).catch((e) => {
           alert('We could not retrieve your message');
           console.log(e);
         });
-    }
-  },
-  watch:{
-    TimeRange(val){
-      if(this.audio_buffer && this.audio_type){
-        let len=this.audio_buffer.length;
-        let bt=Math.floor(len*val[0]/100);
-        let et=Math.floor(len*val[1]/100);
-        const file = new File([this.audio_buffer.slice(bt,et)], 'me-at-thevoice.mp3', {
-          type: this.audio_type,
-          lastModified: Date.now()
-        });
-        this.audio_url=URL.createObjectURL(file);
-        this.recordedTime=(et-bt)/16000;
-        console.log(this.audio_buffer.slice(bt,bt+20));
-      }
     }
   },
   components:{
@@ -126,7 +109,7 @@ div#icon.start_record {
     width: 45px;
 }
 div#icon.stop_record {
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
 }
 </style>
